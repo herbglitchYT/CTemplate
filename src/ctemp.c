@@ -37,9 +37,9 @@ int ctemp_run(int argc, char **argv){
 
         if(command){ return i; }
 
-        if(!path){
-            path = argv[i];
-        }
+        if(path){ return i; }
+
+        path = argv[i];
     }
 
     return 0;
