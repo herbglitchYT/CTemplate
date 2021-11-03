@@ -26,7 +26,7 @@ int ctemp_run(int argc, char **argv){
     if(argc < 2){ return CTEMP_ERR_ARG_SIZE; }
 
     int command;
-    char *path;
+    char *path = NULL;
     for(int i = 1; i < argc; i++){
         command = ctemp_check_command(argv[i]);
         if(command > 0){
@@ -35,11 +35,12 @@ int ctemp_run(int argc, char **argv){
             continue;
         }
 
-        if(command){ return i; }
+        if(!path && !command){
+            path = argv[i];
+            continue;
+        }
 
-        if(path){ return i; }
-
-        path = argv[i];
+        return i;
     }
 
     return 0;
