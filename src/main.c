@@ -8,11 +8,17 @@ int main(int argc, char **argv){
     if(err == 0){ return 0;}
 
     switch(err){
+        case CTEMP_ERR_CONFIG_INIT:
+            printf("ctemp: fatal error: CTemp_Config failed to init. This should never happen.\nsetup terminated.\n");
+            break;
         case CTEMP_ERR_ARG_SIZE:
             printf("ctemp: *** No targets specified. Stop.\n");
             break;
         case CTEMP_ERR_PATH:
             printf("ctemp: fatal error: no path defined\nsetup terminated.\n");
+            break;
+        case CTEMP_ERR_TYPE:
+            printf("ctemp: fatal error: type specified was not cmake or make.\nsetup terminated.\n");
             break;
         default:
             printf("ctemp: '%s' is not a ctemp command. See 'ctemp --help'.\n", argv[err]);

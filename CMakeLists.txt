@@ -9,4 +9,5 @@ add_executable(${PROJECT_NAME}
     src/commands/help.c
     src/commands/lib.c
     src/commands/type.c
+    src/commands/version.c
 )

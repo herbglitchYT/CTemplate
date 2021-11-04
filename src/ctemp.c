@@ -5,9 +5,10 @@
 #include <stdio.h>
 
 CTemp_Command ctemp_commands[] = {
-    { 'h', "--help", &ctemp_help },
-    { 't', "--type", &ctemp_type },
-    { 'l', "--lib" , &ctemp_lib  },
+    { 'h', "--help",    &ctemp_help    },
+    { 'v', "--version", &ctemp_version },
+    { 't', "--type",    &ctemp_type    },
+    { 'l', "--lib" ,    &ctemp_lib     },
 };
 unsigned int ctemp_commands_size = sizeof(ctemp_commands) / sizeof(CTemp_Command);
 
@@ -21,6 +22,7 @@ int ctemp_check_command(char *command){
 int ctemp_init(CTemp_Config *config){
     config->type = CTEMP_CONFIG_TYPE_CMAKE;
     config->path = NULL;
+    return 0;
 }
 
 int ctemp_run(int argc, char **argv){

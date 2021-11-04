@@ -3,9 +3,10 @@
 
 #include "../config.h"
 
-int ctemp_help(CTemp_Config *config, char *val);
-int ctemp_type(CTemp_Config *config, char *val);
-int ctemp_lib (CTemp_Config *config, char *val);
+int ctemp_help   (CTemp_Config *config, char *val);
+int ctemp_version(CTemp_Config *config, char *val);
+int ctemp_type   (CTemp_Config *config, char *val);
+int ctemp_lib    (CTemp_Config *config, char *val);
 
 #define CTEMP_ERR_CONFIG_INIT -1
 #define CTEMP_ERR_ARG_SIZE    -2
