@@ -7,4 +7,6 @@ add_executable(${PROJECT_NAME}
     src/ctemp.c
 
     src/commands/help.c
+    src/commands/lib.c
+    src/commands/type.c
 )
