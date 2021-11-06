@@ -1,0 +1,15 @@
+-h --help
+-t --type
+-s --save //defaults
+-l --lib //libs
+-c --config //url to config folder
+-g --git //git url for exsiting projects
+
+ctemp [path/folder]
+
+/*
+mkdir /path
+cd /path
+git init
+echo "" > CMakeLists.txt
+*/
