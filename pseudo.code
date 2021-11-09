@@ -11,5 +11,9 @@ ctemp [path/folder]
 mkdir /path
 cd /path
 git init
-echo "" > CMakeLists.txt
+cmake_minimum_required(VERSION 3.10)\n\nproject(ctemp)\nadd_executable(%s\n        #your .c/.cpp files here\n) > CMakeLists.txt
 */
+
+
+ideas:
+    adds hpp and cpp files with simple class layouts from the name of the file + namespace?
