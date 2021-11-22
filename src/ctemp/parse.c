@@ -1,8 +1,4 @@
 #include "ctemp.h"
-#include "config.h"
-#include "commands/commands.h"
-#include <string.h>
-#include <stdio.h>
 
 CTemp_Command ctemp_commands[] = {
     { 'h', "--help",    &ctemp_help    },
@@ -10,14 +6,6 @@ CTemp_Command ctemp_commands[] = {
     { 't', "--type",    &ctemp_type    },
     { 'l', "--lib" ,    &ctemp_lib     },
 };
-unsigned int ctemp_commands_size = sizeof(ctemp_commands) / sizeof(CTemp_Command);
-
-int ctemp_check_command(char *command){
-    for(unsigned int i = 0; i < ctemp_commands_size; i++){
-        if((command[0] == '-' && command[1] == ctemp_commands[i].abrv) || !strcmp(command, ctemp_commands[i].full)){ return (int)i + 1; }
-    }
-    return (command[0] == '-')? -1 : 0;
-}
 
 int ctemp_init(CTemp_Config *config){
     config->type = CTEMP_CONFIG_TYPE_CMAKE;
@@ -25,11 +13,18 @@ int ctemp_init(CTemp_Config *config){
     return 0;
 }
 
-int ctemp_run(int argc, char **argv){
-    if(argc < 2){ return CTEMP_ERR_ARG_SIZE; }
+int ctemp_check_command(char *command){
+    for(unsigned int i = 0; i < sizeof(ctemp_commands) / sizeof(CTemp_Command); i++){
+        if((command[0] == '-' && command[1] == ctemp_commands[i].abrv) || !strcmp(command, ctemp_commands[i].full)){ return (int)i + 1; }
+    }
+    return (command[0] == '-')? -1 : 0;
+}
+
+int ctemp_parse(int argc, char **argv){
+    if(argc < 2){ return -CTemp_Error_Arg_Size; }
 
     CTemp_Config config;
-    if(ctemp_init(&config)){ return CTEMP_ERR_CONFIG_INIT; }
+    if(ctemp_init(&config)){ return -CTemp_Error_Config_Init; }
 
     int command;
     char *val = NULL;
@@ -50,13 +45,15 @@ int ctemp_run(int argc, char **argv){
             continue;
         }
 
-        if(config.path && !command){
+        if(!config.path && !command){
             config.path = argv[i];
             continue;
         }
 
         return i;
     }
+
+    ctemp_main(&config);
 
     return 0;
 }

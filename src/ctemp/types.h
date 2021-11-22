@@ -1,5 +1,5 @@
-#ifndef CONFIG_H_
-#define CONFIG_H_
+#ifndef CTEMP_TYPES_H_
+#define CTEMP_TYPES_H_
 
 typedef enum CTemp_ConfigType {
     CTEMP_CONFIG_TYPE_CMAKE,

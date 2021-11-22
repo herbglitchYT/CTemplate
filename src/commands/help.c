@@ -1,6 +1,4 @@
 #include "commands.h"
-#include "../config.h"
-#include <stdio.h>
 
 int ctemp_help(CTemp_Config *config, char *val){
     printf("\
