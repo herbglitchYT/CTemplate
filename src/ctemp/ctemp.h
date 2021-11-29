@@ -1,14 +1,12 @@
 #ifndef CTEMP_H_
 #define CTEMP_H_
 
-#include "error.h"
-#include "types.h"
-#include "../commands/commands.h"
-#include <stdio.h>
-#include <string.h>
+#include "../defines/ctemp.h"
+#include "../defines/error.h"
 
-int  ctemp_parse(int argc, char **argv);
-int  ctemp_main (CTemp_Config *config);
-void ctemp_print_error(int err, char** argv);
+void ctemp_init(int argc, char **argv);
+int  ctemp_main(CTemp_Config *config);
+
+void ctemp_print_error(Error err, char** argv);
 
 #endif

@@ -1,5 +1,7 @@
-#include "commands.h"
-#include <sys/stat.h>
+#include "ctemp.h"
+
+int ctemp_init_folder(CTemp_Config *config);
+int ctemp_init_cmake (CTemp_Config *config);
 
 int ctemp_main(CTemp_Config *config){
     ctemp_init_folder(config);
@@ -11,10 +13,10 @@ int ctemp_main(CTemp_Config *config){
 int ctemp_init_folder(CTemp_Config *config){
     // if()
 
-    struct stat sb;
-    if(stat(config->path, &sb) || !S_ISDIR(sb.st_mode)){
-        printf("ret = %d\n", ctemp_mkdir(config->path));
-    }
+    
+    // if(!S_ISDIR(sb.st_mode)){
+        // printf("ret = %d\n", ctemp_mkdir(config->path));
+    // }
 
     return 0;
 }

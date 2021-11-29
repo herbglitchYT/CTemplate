@@ -1,6 +1,6 @@
 #include "commands.h"
 
-int ctemp_help(CTemp_Config *config, char *val){
+void ctemp_help(CTemp_Config *config, char *val){
     printf("\
 Usage: ctemp [options]\n\
 Options:\n\
@@ -8,5 +8,5 @@ Options:\n\
 \t-t, --type\tSet compile type. (make, cmake).\n\t\t\tIf this flag is not specified, cmake will be used.\n"
     );
 
-    return 0;
+    config->flag_path_override = 0x01;
 }

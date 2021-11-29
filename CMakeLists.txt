@@ -7,14 +7,14 @@ add_executable(ctemp
 
     src/commands/help.c
     src/commands/lib.c
-    src/commands/main.c
     src/commands/type.c
     src/commands/version.c
 
-    src/ctemp/ctemp.c
     src/ctemp/error.c
+    src/ctemp/main.c
+    src/ctemp/parse.c
 
-    src/system/sys.c
+    src/system/linux/sys.c
 )
 
 target_link_libraries(ctemp PRIVATE -Wall -Werror)

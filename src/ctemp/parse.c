@@ -1,4 +1,7 @@
 #include "ctemp.h"
+#include "../commands/commands.h"
+#include <string.h>
+#include <stdio.h>
 
 CTemp_Command ctemp_commands[] = {
     { 'h', "--help",    &ctemp_help    },
@@ -7,10 +10,13 @@ CTemp_Command ctemp_commands[] = {
     { 'l', "--lib" ,    &ctemp_lib     },
 };
 
-int ctemp_init(CTemp_Config *config){
+void ctemp_init_config(CTemp_Config *config){
+    config->err  = (Error){ 0, 0 };
     config->type = CTEMP_CONFIG_TYPE_CMAKE;
+
+    config->flag_path_override = 0x00;
+
     config->path = NULL;
-    return 0;
 }
 
 int ctemp_check_command(char *command){
@@ -20,15 +26,17 @@ int ctemp_check_command(char *command){
     return (command[0] == '-')? -1 : 0;
 }
 
-int ctemp_parse(int argc, char **argv){
-    if(argc < 2){ return -CTemp_Error_Arg_Size; }
-
+void ctemp_init(int argc, char **argv){
     CTemp_Config config;
-    if(ctemp_init(&config)){ return -CTemp_Error_Config_Init; }
+    ctemp_init_config(&config);
+
+    if(argc < 2){ config.err = (Error){ CTemp_Errno, CTemp_Error_Arg_Size }; }
 
     int command;
     char *val = NULL;
     for(int i = 1; i < argc; i++){
+        if(config.err.errno){ break; }
+
         command = ctemp_check_command(argv[i]);
         if(command > 0){
             if(argv[i][1] != '-' && strlen(argv[i]) > 2){ val = argv[i] + 2; }
@@ -38,9 +46,7 @@ int ctemp_parse(int argc, char **argv){
                 val = argv[i];
             }
 
-            int err = ctemp_commands[command - 1].func(&config, val);
-            if(err){ return err; }
-
+            ctemp_commands[command - 1].func(&config, val);
             val = NULL;
             continue;
         }
@@ -50,10 +56,12 @@ int ctemp_parse(int argc, char **argv){
             continue;
         }
 
-        return i;
+        config.err = (Error){ CTemp_Flag_Errno, i };
     }
 
-    ctemp_main(&config);
+    if(!config.err.errno && !config.path && !config.flag_path_override){ config.err = (Error){ CTemp_Errno, CTemp_Error_No_Path }; }
 
-    return 0;
+    if(!config.err.errno){ ctemp_main(&config); }
+
+    if(config.err.errno){ ctemp_print_error(config.err, argv); }
 }
