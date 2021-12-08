@@ -1,6 +1,6 @@
 # CTemplate
 ## An easy to use and reliable Package/Project Manager for C and C++.
-This project is created in order to re-awake the awesome era old school C and C++ programming by helping developers focus only on their code and we will handle the rest including Makefiles, Linking and Compiling.
+This project is created in order to bring back the awesome era old school C and C++ programming with ease helping developers focus only on their code and we will handle the rest including Makefiles, Linking and Compiling.
 ### Basics To Get Started:
 * `ctemp --help`
   * `ctemp -h` can also be used for the same.
