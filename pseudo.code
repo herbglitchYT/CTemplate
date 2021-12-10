@@ -1,0 +1,19 @@
+-h --help
+-t --type
+-s --save //defaults
+-l --lib //libs
+-c --config //url to config folder
+-g --git //git url for exsiting projects
+
+ctemp [path/folder]
+
+/*
+mkdir /path
+cd /path
+git init
+cmake_minimum_required(VERSION 3.10)\n\nproject(ctemp)\nadd_executable(%s\n        #your .c/.cpp files here\n) > CMakeLists.txt
+*/
+
+
+ideas:
+    adds hpp and cpp files with simple class layouts from the name of the file + namespace?

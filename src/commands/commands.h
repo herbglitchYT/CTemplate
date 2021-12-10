@@ -1,14 +1,13 @@
-#ifndef COMMANDS_H_
-#define COMMANDS_H_
+#ifndef CTEMP_COMMANDS_H_
+#define CTEMP_COMMANDS_H_
 
-int ctemp_help();
+#include "../ctemp/ctemp.h"
+#include "../system/system.h"
+#include <stdio.h>
 
-/*
-usage: git [--version] [--help] [-C <path>] [-c <name>=<value>]
-           [--exec-path[=<path>]] [--html-path] [--man-path] [--info-path]
-           [-p | --paginate | -P | --no-pager] [--no-replace-objects] [--bare]
-           [--git-dir=<path>] [--work-tree=<path>] [--namespace=<name>]
-           [--super-prefix=<path>] [--config-env=<name>=<envvar>]
-           <command> [<args>]
-*/
+void ctemp_help   (CTemp_Config *config, char *val);
+void ctemp_version(CTemp_Config *config, char *val);
+void ctemp_type   (CTemp_Config *config, char *val);
+void ctemp_lib    (CTemp_Config *config, char *val);
+
 #endif
